@@ -1,0 +1,151 @@
+@import "~bootstrap/scss/bootstrap";
+:root {
+  --primary-color: #005fff;
+  --primary-color-alpha: #005fff1a;
+  
+}
+
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	// font: inherit;
+	vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#root {
+  // height: 100%;
+  height: 100vh;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+.app__wrapper {
+  display: flex;
+  flex: 1;
+  /* height: 800px; */
+  height: 100%;
+  /* border-radius: 16px; */
+  box-shadow: rgba(0, 0, 0, 0.33) 0px 1px 4px 0px;
+}
+
+.str-chat-channel-list {
+  height: fit-content;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.str-chat-channel {
+  height: 100%;
+}
+
+.str-chat__load-more-button {
+  display: none;
+}
+
+.str-chat__input-footer {
+  display: none;
+}
+
+.str-chat__date-separator {
+  margin: 16px 24px;
+}
+
+.str-chat__message-notification {
+  background: var(--primary-color);
+  cursor: pointer;
+}
+
+@media screen and (max-width: 960px) {
+  .str-chat-channel-list.team {
+    position: unset;
+    left: unset;
+    top: unset;
+    z-index: unset;
+    min-height: unset;
+    overflow-y: unset;
+    box-shadow: unset;
+    transition: unset;
+  }
+}
+
+.str-chat__message-simple-status .str-chat__avatar {
+  display: block !important;
+}
+.str-chat__message-simple-status {
+  display: none;
+  left: 100%;
+  cursor: pointer;
+}
+
+.nav-item {
+  flex: 1;
+}
+.nav-link {
+  width: 100%;
+  padding: 5px !important;
+  color: white !important;
+  font-size: 14px;
+}
+
+.nav-tabs .nav-link.active {
+  color: #495057 !important;
+
+}
+
+.tab-content {
+  overflow-y: scroll;
+}
+
+.str-chat__list-notifications {
+  max-height: 190px;
+  overflow: hidden;
+  display: block;
+}
+
+.str-chat__send-button {
+  display: block;
+}

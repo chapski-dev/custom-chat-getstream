@@ -1,0 +1,13 @@
+.str-chat__load-more-button {
+  display: block;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+
+  .str-chat__load-more-button__button {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important; 
+    color: var(--bs-white) !important;
+  }
+}
