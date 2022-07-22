@@ -11,6 +11,7 @@ import {
   // Message,
 } from "stream-chat-react";
 import CommonModal from "../CommonModal/CommonModal";
+import { CustomMessage } from "../CustomMessage/CustomMessage";
 import "./TeamMessage.scss";
 
 export const TeamMessage = (props) => {
@@ -42,11 +43,11 @@ export const TeamMessage = (props) => {
 
         {message.user.userType === "service" ? (
           <div className="service-message">
-            <MessageSimple {...props} message={message} />
+            <CustomMessage {...props} message={message} />
           </div>
         ) : (
           <div className="driver-message">
-            <MessageSimple {...props} message={message} />
+            <CustomMessage {...props} message={message} />
           </div>
         )}
 
