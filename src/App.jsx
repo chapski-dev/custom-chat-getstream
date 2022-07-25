@@ -61,10 +61,11 @@ const App = () => {
     if (event.total_unread_count !== null && event.total_unread_count !== undefined) {
       console.log(`unread messages count is now: ${event.total_unread_count}`);
       if(event.total_unread_count===0){
+        document.getElementById('favicon').href =  'favicon.ico';
         document.title = 'Xpel Chat';
       } else {
+        document.getElementById('favicon').href =  'unread_favicon.ico';
         document.title = `(${event.total_unread_count}) Xpel Chat`;
-       //  document.getElementById('favicon').href =  'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/google/223/bell_1f514.png';
       }
     }
    
@@ -104,16 +105,6 @@ const App = () => {
     <>
       <div className='app__wrapper'>
         <Chat {...{ client, i18nInstance }} theme={`team ${theme}`}>
-          {showNotificationBanner && (
-            <div class="alert">
-              <p>
-                Stream needs your permission to
-                <button onClick={grantPermission}>
-                  enable desktop notifications
-                </button>
-              </p>
-            </div>
-          )}
           <ChannelListContainer
             {...{
               isCreating,
