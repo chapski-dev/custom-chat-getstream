@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import { StreamChat } from 'stream-chat';
 import { Chat, enTranslations, Streami18n } from 'stream-chat-react';
 
@@ -43,9 +43,63 @@ const App = () => {
   const [createType, setCreateType] = useState('');
   const [isCreating, setIsCreating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-
+  const [showNotificationBanner, setShowNotificationBanner] = useState(false);
   useChecklist(client, targetOrigin);
+  useEffect(() => {
+  //  const channel = client.channel();
+  //  channel.on("message.new", event => {
+  //    console.log("you got mail");
+  //  });
+  client.on(event => {
+    if (event.type === 'message.new' && event.unread_count > 0) {
+      console.log(JSON.stringify(event));
+      console.log(`(${event.user.name}) ${event.message.text}`)
+      new Notification(event.user.name, {
+        body: event.message.text,
+      });
+    }
+    if (event.total_unread_count !== null && event.total_unread_count !== undefined) {
+      console.log(`unread messages count is now: ${event.total_unread_count}`);
+      if(event.total_unread_count===0){
+        document.getElementById('favicon').href =  'favicon.ico';
+        document.title = 'Xpel Chat';
+      } else {
+        document.getElementById('favicon').href =  'unread_favicon.ico';
+        document.title = `(${event.total_unread_count}) Xpel Chat`;
+      }
+    }
+   
+    if (event.unread_channels !== null && event.unread_channels !== undefined) {
+      console.log(`unread channels count is now: ${event.unread_channels}`);
+    }
+  });
+  
+    console.log("Use effect " + window.Notification &&
+    (Notification.permission === 'granted' ||
+      Notification.permission === 'denied'));
+      console.log(Notification.permission);
+    if ( window.Notification && (Notification.permission === 'granted' || Notification.permission === 'denied'))
+      return;
+    grantPermission();
+    setShowNotificationBanner(true);
+  }, []);
+  function grantPermission() {
+    if (Notification.permission === 'granted') {
+      return;
+    }
 
+    if ( Notification.permission !== 'denied' || Notification.permission === 'default' ) {
+      Notification.requestPermission().then(result => {
+        if (result === 'granted') {
+          new Notification('New message from Stream', {
+            body: 'Nice, notifications are now enabled!',
+          });
+        }
+      });
+    }
+
+    setShowNotificationBanner(false);
+  }
 
   return (
     <>
