@@ -1,11 +1,12 @@
 import SearchInput from "./../SearchInput/SearchInput";
 import _debounce from "lodash.debounce";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, useChatContext } from "stream-chat-react";
 
 import "./UserList.css";
 
 import { InviteIcon } from "../../assets";
+import { Button, Spinner } from "react-bootstrap";
 
 const ListContainer = ({ inputText, onSearch, children }) => {
   return (
@@ -22,7 +23,7 @@ const ListContainer = ({ inputText, onSearch, children }) => {
   );
 };
 
-const UserItem = ({ setSelectedUsers, user }) => {
+const UserItem = React.memo(({ setSelectedUsers, user }) => {
   const [selected, setSelected] = useState(false);
 
   const handleClick = () => {
@@ -45,7 +46,7 @@ const UserItem = ({ setSelectedUsers, user }) => {
       {selected ? <InviteIcon /> : <div className="user-item__invite-empty" />}
     </div>
   );
-};
+});
 
 export const UserList = (props) => {
   const { setSelectedUsers } = props;
@@ -55,27 +56,30 @@ export const UserList = (props) => {
   const [error, setError] = useState(false);
   const [listEmpty, setListEmpty] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [users, setUsers] = useState();
+  const [users, setUsers] = useState([]);
+  const [cacheUsers, setCacheUsers] = useState(1);
+  const [hideLoadMoreBtn, setHideLoadMoreBtn] = useState(false);
 
   const [searching, setSearching] = useState(false);
   const [inputText, setInputText] = useState("");
+  const [optionLimits, setOptionLimits] = useState(10);
 
   useEffect(() => {
     if (inputText.length > 1) {
       findUsersDebounce();
     } else {
-      setListEmpty(false)
+      setListEmpty(false);
       const getUsers = async () => {
         if (loading) return;
         setLoading(true);
-  
+
         try {
           const response = await client.queryUsers(
             { id: { $ne: client.userID }, userType: "service" },
             { id: 1 },
-            { limit: 8 }
+            { limit: optionLimits }
           );
-  
+
           if (response.users.length) {
             setUsers(response.users);
           } else {
@@ -84,13 +88,13 @@ export const UserList = (props) => {
         } catch (event) {
           setError(true);
         }
-  
+
         setLoading(false);
       };
-  
+
       if (client) getUsers();
     }
-  }, [inputText]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [inputText, optionLimits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const findUsers = async () => {
     !!inputText && setSearching(false);
@@ -134,6 +138,19 @@ export const UserList = (props) => {
     findUsersDebounce(event.target.value);
   };
 
+  useEffect(() => {
+    if (users && cacheUsers === users.length) {
+      setHideLoadMoreBtn(true);
+    }
+  }, [cacheUsers, users]);
+
+  const loadMoreUsers = () => {
+    setOptionLimits((prevState) => prevState + 10);
+    setUsers((prevState) => {
+      setCacheUsers(prevState.length);
+    });
+  };
+
   if (error) {
     return (
       <ListContainer inputText={inputText} onSearch={onSearch}>
@@ -155,7 +172,14 @@ export const UserList = (props) => {
   return (
     <ListContainer inputText={inputText} onSearch={onSearch}>
       {loading ? (
-        <div className="user-list__message">Loading users...</div>
+        <Spinner
+          style={{ alignSelf: "center" }}
+          animation="border"
+          role="status"
+          variant="primary"
+        >
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
       ) : (
         users?.length &&
         users.map((user, i) => (
@@ -166,6 +190,19 @@ export const UserList = (props) => {
             user={user}
           />
         ))
+      )}
+      {!inputText && !hideLoadMoreBtn && (
+        <Button
+          style={{
+            width: "fit-content",
+            alignSelf: "center",
+            marginTop: "20px",
+          }}
+          variant="primary"
+          onClick={loadMoreUsers}
+        >
+          Load More
+        </Button>
       )}
     </ListContainer>
   );

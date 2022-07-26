@@ -14,7 +14,7 @@ import { AddUser } from "./../../assets/AddUser";
 
 const MessagingChannelHeader = ({ setPinsOpen }) => {
   const { client } = useChatContext();
-  const { channel, watcher_count } = useChannelStateContext();
+  const { channel } = useChannelStateContext();
   const { closeThread } = useChannelActionContext();
 
   const [channelName] = useState(channel?.data.name);
@@ -23,7 +23,7 @@ const MessagingChannelHeader = ({ setPinsOpen }) => {
   const [onInviteUser, setOnInviteUser] = useState(false);
   const inputRef = useRef();
 
-  const members = Object.values(channel.state?.members || {})
+  const members = Object.values(channel.state?.members || {});
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
@@ -35,11 +35,11 @@ const MessagingChannelHeader = ({ setPinsOpen }) => {
     if (!channelName) {
       setTitle(
         members.length > 0 &&
-        members
-          .map(
-            (member) => member.user?.name || member.user?.id || "Unnamed User"
-          )
-          .join(", ")
+          members
+            .map(
+              (member) => member.user?.name || member.user?.id || "Unnamed User"
+            )
+            .join(", ")
       );
     }
   }, [channelName, members]);
@@ -47,10 +47,39 @@ const MessagingChannelHeader = ({ setPinsOpen }) => {
   return (
     <div className="messaging__channel-header">
       <div className="channel-header__name">
-        {channelName || title}{" "}
+        {channelName ? (
+          <>
+          <div>
+
+          
+            <p>
+              <span>
+                {channel.data.unitCode} {` `}
+              </span>
+              <span>
+                {channel.data.firstName} {` `}
+                {channel.data.lastName} {` `}
+              </span>
+              <b
+                className={`channel_type ${
+                  channel.data.channel_type === "driver" ? "driver" : "other"
+                } `}
+              >
+                {channel.data.channel_type}
+              </b>
+            </p>
+            <p style={{color: "var(--bs-primary)"}}>{channel.data.phoneNumber}</p>
+            </div>
+          </>
+        ) : (
+          title
+        )}
+        {/* {channelName || title}{" "} */}
         {channel.type === "team" && (
           <span
-            onClick={() => !onInviteUser ? setOnInviteUser(true) : setOnInviteUser(false)}
+            onClick={() =>
+              !onInviteUser ? setOnInviteUser(true) : setOnInviteUser(false)
+            }
           >
             <AddUser />
           </span>
