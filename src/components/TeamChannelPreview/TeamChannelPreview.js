@@ -12,11 +12,9 @@ export const TeamChannelPreview = ({
   setIsEditing,
   type,
 }) => {
-
   const { channel: activeChannel, client } = useChatContext();
 
   const ChannelPreview = () => {
-    
     return (
       <p className="channel-preview__item">
         {channel.countUnread() > 0 && channel.countUnread() <= 100 ? (
@@ -28,7 +26,21 @@ export const TeamChannelPreview = ({
             +100
           </span>
         ) : null}
-        # {channel.data.name}
+        <span>
+          {channel.data.unitCode} {` `}
+        </span>
+        <span>
+          {channel.data.firstName} {` `}
+          {channel.data.lastName} {` `}
+        </span>
+        <b
+          className={`channel_type ${channel.data.channel_type === 'driver' ? 'driver': 'other'} `}
+        >
+          {channel.data.channel_type}
+        </b>
+        <p>
+          {channel.data.phoneNumber}
+        </p>
       </p>
     );
   };

@@ -1,9 +1,9 @@
 .channel-preview__wrapper,
 .channel-preview__wrapper__selected {
-  height: 40px;
+  min-height: 45px;
   display: flex;
   align-items: center;
-  max-width: 224px;
+  // max-width: 224px;
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 5px;
@@ -14,18 +14,19 @@
   background: rgba(0, 0, 0, 0.2);
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
-  font-weight: bold;
-  margin-right: 16px;
+  // font-weight: bold;
+  // margin-right: 16px;
   margin-bottom: 5px;
   cursor: pointer;
 }
 
 .channel-preview__wrapper {
+  background: #e3f2fd1a;
   &:hover {
     background: rgba(0, 0, 0, 0.2);
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
-    margin-right: 16px;
+    // margin-right: 16px;
     cursor: pointer;
   }
 }
@@ -35,15 +36,15 @@
   font-size: 14px;
   color: #ffffff;
   padding-left: 10px;
-  max-width: 207px;
+  // max-width: 207px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  // white-space: nowrap;
   padding: 7px 0 7px 15px;
-
+  line-height: 18px;
   p {
     overflow: hidden;
-    white-space: nowrap;
+    // white-space: nowrap;
     text-overflow: ellipsis;
     margin: 0;
   }
