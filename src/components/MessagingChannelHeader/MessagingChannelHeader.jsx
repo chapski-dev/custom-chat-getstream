@@ -49,26 +49,35 @@ const MessagingChannelHeader = ({ setPinsOpen }) => {
       <div className="channel-header__name">
         {channelName ? (
           <>
-          <div>
+            <div>
+              <p>
+                <span>
+                  {channel.data.unitCode} {` `}
+                </span>
+                <span>
+                  {channel.data.firstName} {` `}
+                  {channel.data.lastName} {` `}
+                </span>
+              </p>
+              <p style={{ color: "var(--bs-primary)" }}>
+                <a
+                  href={`tel:+${channel.data.countryCode}${channel.data.phoneNumberRaw}`}
+                >
+                  {channel.data.phoneNumber}
+                </a>
+              </p>
 
-          
-            <p>
-              <span>
-                {channel.data.unitCode} {` `}
-              </span>
-              <span>
-                {channel.data.firstName} {` `}
-                {channel.data.lastName} {` `}
-              </span>
-              <b
-                className={`channel_type ${
-                  channel.data.channel_type === "driver" ? "driver" : "other"
-                } `}
-              >
-                {channel.data.channel_type}
-              </b>
-            </p>
-            <p style={{color: "var(--bs-primary)"}}>{channel.data.phoneNumber}</p>
+              <p>
+                <b
+                  className={`channel_type ${
+                    channel.data.channel_type === "driver" ? "driver" : "other"
+                  } `}
+                >
+                  {channel.data.channel_type === "driver"
+                    ? "unit"
+                    : channel.data.recordType}
+                </b>
+              </p>
             </div>
           </>
         ) : (

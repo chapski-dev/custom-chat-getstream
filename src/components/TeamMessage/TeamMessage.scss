@@ -338,8 +338,7 @@ ul.str-chat__simple-reactions-list:hover {
   background: #dde7f0;
   width: fit-content;
   font-size: 12px;
-  // margin-left: 40px;
-  margin-bottom: -5px;
+  margin-bottom: -7px;
   padding: 5px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -348,9 +347,13 @@ ul.str-chat__simple-reactions-list:hover {
     border-radius: 5px;
   }
 
-  & ~ .service-message {
+  & ~ .driver-message {
     border-top-left-radius: 0;
     padding: 15px;
+  }
+
+  &.right {
+    margin-left: auto;
   }
 }
 
@@ -390,7 +393,7 @@ ul.str-chat__simple-reactions-list:hover {
 }
 
 // SERVICE USER MESSAGE
-.service-message {
+.driver-message {
   position: relative;
 
   .str-chat__message--me .str-chat__message-text-inner,
@@ -437,7 +440,7 @@ ul.str-chat__simple-reactions-list:hover {
 
 
 // DRIVER USER MESSAGE
-.driver-message {
+.service-message {
   .str-chat__message,
   .str-chat__message-simple {
     justify-content: flex-end;

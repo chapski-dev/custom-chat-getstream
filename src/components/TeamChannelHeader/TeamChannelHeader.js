@@ -13,7 +13,7 @@ import { ChannelInfo, PinIcon } from '../../assets';
 export const TeamChannelHeader = ({ setIsEditing, setPinsOpen }) => {
   const { client } = useChatContext();
   const { closeThread } = useChannelActionContext();
-  const { channel, watcher_count } = useChannelStateContext();
+  const { channel } = useChannelStateContext();
 
   const teamHeader = `# ${channel.data.name || channel.data.id || 'random'}`;
 
@@ -52,7 +52,6 @@ export const TeamChannelHeader = ({ setIsEditing, setPinsOpen }) => {
     );
   };
 
-  console.log(channel);
   return (
     <div className='team-channel-header__container'>
       {channel.type === 'messaging' ? (

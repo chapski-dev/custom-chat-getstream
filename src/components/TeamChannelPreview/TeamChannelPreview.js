@@ -12,8 +12,8 @@ export const TeamChannelPreview = ({
   setIsEditing,
   type,
 }) => {
+  console.log(channel.data.recordType);
   const { channel: activeChannel, client } = useChatContext();
-
   const ChannelPreview = () => {
     return (
       <p className="channel-preview__item">
@@ -33,13 +33,15 @@ export const TeamChannelPreview = ({
           {channel.data.firstName} {` `}
           {channel.data.lastName} {` `}
         </span>
-        <b
-          className={`channel_type ${channel.data.channel_type === 'driver' ? 'driver': 'other'} `}
-        >
-          {channel.data.channel_type}
-        </b>
         <p>
           {channel.data.phoneNumber}
+        </p>
+        <p>
+          <b
+            className={`channel_type ${channel.data.channel_type === 'driver' ? 'driver': 'other'} `}
+          >
+            {channel.data.channel_type === 'driver' ? 'unit': channel.data.recordType }
+          </b>
         </p>
       </p>
     );

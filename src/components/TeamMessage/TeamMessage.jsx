@@ -5,7 +5,7 @@ import {
   useMessageContext,
   Avatar,
   useChatContext,
-  MessageSimple,
+  // MessageSimple,
   // MessageLivestream,
   // MessageOptions,
   // Message,
@@ -27,6 +27,7 @@ export const TeamMessage = (props) => {
     setHowRead(readByUsers.filter((i) => i.name !== client.user.name));
   };
 
+  console.log(message);
   return (
     <>
       <div
@@ -34,7 +35,11 @@ export const TeamMessage = (props) => {
      ${message.user.userType === "service" ? "service-message" : "regular"}`}
       >
         {"forward_message" in message && (
-          <div className="forward-message">
+          <div
+            className={`forward-message ${
+              message.user.userType === "service" && "right"
+            }`}
+          >
             Forward from{" "}
             <b>{message.message_author_name || message.message_author_id}</b>:
           </div>
@@ -51,7 +56,7 @@ export const TeamMessage = (props) => {
           </div>
         )}
 
-        {readBy.filter((el) => el.name !== client.user.name).length > 1? (
+        {readBy.filter((el) => el.name !== client.user.name).length > 1 ? (
           <div
             className="message-status-wrapper"
             onClick={() => {
