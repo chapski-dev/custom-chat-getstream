@@ -42,8 +42,8 @@ export const ChannelContainer = (props) => {
     );
   }
   const frmtDta= function(date){
-    const timeZone = Moment(date).tz("America/Los_Angeles").isDST()? "PDT" : "PST";
-    return Moment(date).tz("America/Los_Angeles").format("MMMM, DD YYYY HH:mm ")+ timeZone;
+    //const timeZone = Moment(date).tz("America/Los_Angeles").isDST()? "PDT" : "PST";
+    return Moment(date).tz("America/Los_Angeles").format("MMMM, DD YYYY");
   }
 
   return (
