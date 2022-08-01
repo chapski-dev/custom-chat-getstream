@@ -12,7 +12,6 @@ export const TeamChannelPreview = ({
   setIsEditing,
   type,
 }) => {
-  console.log(channel.data.recordType);
   const { channel: activeChannel, client } = useChatContext();
   const ChannelPreview = () => {
     return (

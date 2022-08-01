@@ -70,6 +70,7 @@ export const ChannelContainer = (props) => {
             pinsOpen,
             setIsEditing,
             setPinsOpen,
+            channel
           }}
         />
       </Channel>

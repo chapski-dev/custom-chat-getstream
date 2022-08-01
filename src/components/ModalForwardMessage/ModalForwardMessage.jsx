@@ -54,6 +54,8 @@ const SearchResult = ({
 
 function ModalForwardMessage({
   attachments,
+  channel,
+  channelName,
   messageAuthorID,
   messageAuthorName,
   showModal,
@@ -119,6 +121,7 @@ function ModalForwardMessage({
     chat.sendMessage({
       text: selectedMessage,
       attachments: attachments,
+      channelName: channelName,
       message_author_name: messageAuthorName,
       message_author_id: messageAuthorID,
       forward_message: true,
@@ -126,9 +129,18 @@ function ModalForwardMessage({
   };
 
   const setChannelByUser = (client, setActiveChannel, channel) => {
-    channelByUser({ client, setActiveChannel, channel, selectedMessage, messageAuthorName, messageAuthorID, attachments })
+    channelByUser({
+      client,
+      setActiveChannel,
+      channel,
+      selectedMessage,
+      messageAuthorName,
+      messageAuthorID,
+      attachments,
+      channelName,
+    });
   };
-
+  console.log(channel);
   const getChannels = async (text) => {
     try {
       const channelResponse = client.queryChannels(
@@ -200,23 +212,28 @@ function ModalForwardMessage({
           {/* <p>Channels goes here.</p> */}
           {!!teamChannels.length && !!directChannels.length ? (
             <>
-              <p className="channel-search__results-header">Channels</p>
-              {!loading && !teamChannels.length ? (
-                <p className="channel-search__results-header">
-                  <i>No channels found</i>
-                </p>
-              ) : (
-                teamChannels?.map((channel, i) => (
-                  <SearchResult
-                    channel={channel}
-                    focusedId={focusedId}
-                    key={i}
-                    setChannel={setChannel}
-                    setChannelByUser={setChannelByUser}
-                    type="channel"
-                  />
-                ))
+              {channel.type !== "team" && (
+                <>
+                  <p className="channel-search__results-header">Channels</p>
+                  {!loading && !teamChannels.length ? (
+                    <p className="channel-search__results-header">
+                      <i>No channels found</i>
+                    </p>
+                  ) : (
+                    teamChannels?.map((channel, i) => (
+                      <SearchResult
+                        channel={channel}
+                        focusedId={focusedId}
+                        key={i}
+                        setChannel={setChannel}
+                        setChannelByUser={setChannelByUser}
+                        type="channel"
+                      />
+                    ))
+                  )}
+                </>
               )}
+
               <p className="channel-search__results-header">Users</p>
 
               {!loading && !directChannels.length ? (

@@ -39,8 +39,13 @@ export const TeamMessage = (props) => {
               message.user.userType === "service" && "right"
             }`}
           >
-            Forward from{" "}
-            <b>{message.message_author_name || message.message_author_id}</b>:
+            Forward by :
+            <b>{message.message_author_name || message.message_author_id}</b>
+            <p>
+              <b>
+                {message.channel_name ? `from: ${message.channel_name}` : ""}
+              </b>
+            </p>
           </div>
         )}
         {/* <MessageTeam {...props} message={message} /> */}
@@ -60,7 +65,6 @@ export const TeamMessage = (props) => {
             className="message-status-wrapper"
             onClick={() => {
               showReadBy(readBy);
-              console.log(readBy);
             }}
           >
             <MessageStatus />
