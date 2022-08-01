@@ -27,7 +27,6 @@ export const TeamMessage = (props) => {
     setHowRead(readByUsers.filter((i) => i.name !== client.user.name));
   };
 
-  console.log(message);
   return (
     <>
       <div

@@ -43,7 +43,6 @@ const MessagingChannelHeader = ({ setPinsOpen }) => {
       );
     }
   }, [channelName, members]);
-
   return (
     <div className="messaging__channel-header">
       <div className="channel-header__name">
@@ -61,7 +60,9 @@ const MessagingChannelHeader = ({ setPinsOpen }) => {
               </p>
               <p style={{ color: "var(--bs-primary)" }}>
                 <a
-                  href={`tel:+${channel.data.countryCode}${channel.data.phoneNumberRaw}`}
+                  href={`tel:+${
+                    channel.data.countryCode ? channel.data.countryCode : ""
+                  }${channel.data.phoneNumberRaw}`}
                 >
                   {channel.data.phoneNumber}
                 </a>
