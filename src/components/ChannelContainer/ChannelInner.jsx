@@ -63,7 +63,6 @@ export const ChannelInner = (props) => {
     if (channel.data.name) {
       setChannelName(channel.data.name)
     }
-    console.log(channel.data.name);
     if(mes.attachments.length) {
       setAttachments(mes.attachments)
     }

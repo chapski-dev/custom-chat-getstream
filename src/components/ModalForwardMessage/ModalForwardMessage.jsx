@@ -140,7 +140,6 @@ function ModalForwardMessage({
       channelName,
     });
   };
-  console.log(channel);
   const getChannels = async (text) => {
     try {
       const channelResponse = client.queryChannels(
