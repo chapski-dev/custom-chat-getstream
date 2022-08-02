@@ -187,3 +187,7 @@ body {
     background: #82c91e;
   }
 }
+
+.str-chat__message--system__text, .str-chat__message-simple--system__text {
+  word-break: break-all;
+}

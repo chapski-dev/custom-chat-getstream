@@ -42,6 +42,9 @@ export { SideBarFlag } from './SideBarFlag';
 export { SideBarLogo } from './SideBarLogo';
 export { SmileyFace } from './SmileyFace';
 export { StrikeThroughIcon } from './StrikeThroughIcon';
+export { ChannelSaveIcon } from './ChannelSaveIcon';
+export { ChannelInfoIcon } from './ChannelInfoIcon';
+
 
 const randomImages = [
   Avatar1,

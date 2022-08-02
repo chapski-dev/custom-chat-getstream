@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const ChannelInfoIcon = ({ onInviteUser, setOnInviteUser }) => (
+export const ChannelInfoIcon = ({ isEditing, setIsEditing }) => (
   <svg
     width='24'
     height='24'
@@ -9,7 +9,9 @@ export const ChannelInfoIcon = ({ onInviteUser, setOnInviteUser }) => (
     xmlns='http://www.w3.org/2000/svg'
     style={{ cursor: 'pointer', marginLeft: '16px' }}
     onClick={() => {
-      !onInviteUser ? setOnInviteUser(true) : setOnInviteUser(false);
+      if (!isEditing) {
+        setIsEditing(true);
+      }
     }}
   >
     <path
