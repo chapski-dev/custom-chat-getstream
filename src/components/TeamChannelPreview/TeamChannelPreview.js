@@ -13,6 +13,7 @@ export const TeamChannelPreview = ({
   type,
 }) => {
   const { channel: activeChannel, client } = useChatContext();
+
   const ChannelPreview = () => {
     return (
       <p className="channel-preview__item">
@@ -25,6 +26,8 @@ export const TeamChannelPreview = ({
             +100
           </span>
         ) : null}
+        {channel.data.name.includes("General (unsorted messages)") &&
+          channel.data.name}
         <span>
           {channel.data.unitCode} {` `}
         </span>
@@ -32,16 +35,20 @@ export const TeamChannelPreview = ({
           {channel.data.firstName} {` `}
           {channel.data.lastName} {` `}
         </span>
-        <p>
-          {channel.data.phoneNumber}
-        </p>
-        <p>
-          <b
-            className={`channel_type ${channel.data.channel_type === 'driver' ? 'driver': 'other'} `}
-          >
-            {channel.data.channel_type === 'driver' ? 'unit': channel.data.recordType }
-          </b>
-        </p>
+        <p>{channel.data.phoneNumber}</p>
+        {channel.data.channel_type && (
+          <p>
+            <b
+              className={`channel_type ${
+                channel.data.channel_type === "driver" ? "driver" : "other"
+              } `}
+            >
+              {channel.data.channel_type === "driver"
+                ? "unit"
+                : channel.data.recordType}
+            </b>
+          </p>
+        )}
       </p>
     );
   };
@@ -66,10 +73,17 @@ export const TeamChannelPreview = ({
           ) : null}
           <Avatar
             image={members[0]?.user.image || undefined}
-            name={channel.data.name || members[0]?.user.name || members[0]?.user.id}
+            name={
+              channel.data.name || members[0]?.user.name || members[0]?.user.id
+            }
             size={24}
           />
-          <p>{channel.data.name || members[0]?.user.name || members[0]?.user.id || defaultName}</p>
+          <p>
+            {channel.data.name ||
+              members[0]?.user.name ||
+              members[0]?.user.id ||
+              defaultName}
+          </p>
           <TeamTypingIndicator type="list" />
         </div>
       );
@@ -80,18 +94,25 @@ export const TeamChannelPreview = ({
         <span>
           <Avatar
             image={members[0]?.user.image || undefined}
-            name={channel.data.name || members[0]?.user.name || members[0]?.user.id}
+            name={members[0]?.user.name || members[0]?.user.id}
             size={18}
           />
         </span>
         <Avatar
           image={members[1]?.user.image || undefined}
-          name={channel.data.name || members[1]?.user.name || members[1]?.user.id}
+          name={members[1]?.user.name || members[1]?.user.id}
           size={18}
         />
+
         <p>
-          {channel.data.name || members[0]?.user.name || members[0]?.user.id || defaultName},{" "}
-          {channel.data.name || members[1]?.user.name || members[1]?.user.id || defaultName}
+          {channel.data.name ? (
+            channel.data.name
+          ) : (
+            <>
+              {members[0]?.user.name || members[0]?.user.id || defaultName},{" "}
+              {members[1]?.user.name || members[1]?.user.id || defaultName}
+            </>
+          )}
         </p>
       </div>
     );
