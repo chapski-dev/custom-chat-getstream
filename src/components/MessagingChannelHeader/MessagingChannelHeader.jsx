@@ -77,7 +77,6 @@ const MessagingChannelHeader = ({ setPinsOpen }) => {
       </form>
     </div>
   );
-  console.log(channel);
   return (
     <div className="messaging__channel-header">
       {isEditing && channel.type !== "team" ? (

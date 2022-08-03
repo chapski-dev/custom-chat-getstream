@@ -66,10 +66,10 @@ export const TeamChannelPreview = ({
           ) : null}
           <Avatar
             image={members[0]?.user.image || undefined}
-            name={members[0]?.user.name || members[0]?.user.id}
+            name={channel.data.name || members[0]?.user.name || members[0]?.user.id}
             size={24}
           />
-          <p>{members[0]?.user.name || members[0]?.user.id || defaultName}</p>
+          <p>{channel.data.name || members[0]?.user.name || members[0]?.user.id || defaultName}</p>
           <TeamTypingIndicator type="list" />
         </div>
       );
@@ -80,18 +80,18 @@ export const TeamChannelPreview = ({
         <span>
           <Avatar
             image={members[0]?.user.image || undefined}
-            name={members[0]?.user.name || members[0]?.user.id}
+            name={channel.data.name || members[0]?.user.name || members[0]?.user.id}
             size={18}
           />
         </span>
         <Avatar
           image={members[1]?.user.image || undefined}
-          name={members[1]?.user.name || members[1]?.user.id}
+          name={channel.data.name || members[1]?.user.name || members[1]?.user.id}
           size={18}
         />
         <p>
-          {members[0]?.user.name || members[0]?.user.id || defaultName},{" "}
-          {members[1]?.user.name || members[1]?.user.id || defaultName}
+          {channel.data.name || members[0]?.user.name || members[0]?.user.id || defaultName},{" "}
+          {channel.data.name || members[1]?.user.name || members[1]?.user.id || defaultName}
         </p>
       </div>
     );
