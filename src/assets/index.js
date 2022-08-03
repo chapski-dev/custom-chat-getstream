@@ -44,6 +44,7 @@ export { SmileyFace } from './SmileyFace';
 export { StrikeThroughIcon } from './StrikeThroughIcon';
 export { ChannelSaveIcon } from './ChannelSaveIcon';
 export { ChannelInfoIcon } from './ChannelInfoIcon';
+export { ChangeNameIcon } from './ChangeNameIcon';
 
 
 const randomImages = [
