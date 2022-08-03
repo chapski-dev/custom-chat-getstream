@@ -8,7 +8,7 @@ import {
 import "./MessagingChannelHeader.scss";
 import InviteUsers from "../InviteUsers/InviteUsers";
 import { XButtonBackground } from "../../assets/XButtonBackground";
-import { ChannelInfoIcon, ChannelSaveIcon, AddUser } from "../../assets";
+import { ChangeNameIcon, ChannelSaveIcon, AddUser } from "../../assets";
 
 const MessagingChannelHeader = ({ setPinsOpen }) => {
   const { client } = useChatContext();
@@ -85,63 +85,70 @@ const MessagingChannelHeader = ({ setPinsOpen }) => {
         <div className="channel-header__name">
           {channelName ? (
             channel.type !== "team" ? (
-              <>
+              <div className="channel-header__name-actions">
+                <span>
+                  {channelName}
+                </span>
                 {!isEditing && (
-                  <span style={{marginRight: '10px'}}>
-                    <ChannelInfoIcon {...{ isEditing, setIsEditing }} />
-                  </span>
+                  <ChangeNameIcon {...{ isEditing, setIsEditing }} />
                 )}
-                {channelName}
-              </>
+              </div>
             ) : (
               <>
-                <div>
-                  <p>
-                    <span>
-                      {channel.data.unitCode} {` `}
-                    </span>
-                    <span>
-                      {channel.data.firstName} {` `}
-                      {channel.data.lastName} {` `}
-                    </span>
-                  </p>
-                  <p style={{ color: "var(--bs-primary)" }}>
-                    <a
-                      href={`tel:+${
-                        channel.data.countryCode ? channel.data.countryCode : ""
-                      }${channel.data.phoneNumberRaw}`}
-                    >
-                      {channel.data.phoneNumber}
-                    </a>
-                  </p>
+                {channel.data.name.includes("General (unsorted messages)") ? (
+                  channel.data.name
+                ) : (
+                  <div>
+                    <p>
+                      <span>
+                        {channel.data.unitCode} {` `}
+                      </span>
+                      <span>
+                        {channel.data.firstName} {` `}
+                        {channel.data.lastName} {` `}
+                      </span>
+                    </p>
+                    <p style={{ color: "var(--bs-primary)" }}>
+                      <a
+                        href={`tel:+${
+                          channel.data.countryCode
+                            ? channel.data.countryCode
+                            : ""
+                        }${channel.data.phoneNumberRaw}`}
+                      >
+                        {channel.data.phoneNumber}
+                      </a>
+                    </p>
 
-                  <p>
-                    <b
-                      className={`channel_type ${
-                        channel.data.channel_type === "driver"
-                          ? "driver"
-                          : "other"
-                      } `}
-                    >
-                      {channel.data.channel_type === "driver"
-                        ? "unit"
-                        : channel.data.recordType}
-                    </b>
-                  </p>
-                </div>
+                    <p>
+                      <b
+                        className={`channel_type ${
+                          channel.data.channel_type === "driver"
+                            ? "driver"
+                            : "other"
+                        } `}
+                      >
+                        {channel.data.channel_type === "driver"
+                          ? "unit"
+                          : channel.data.recordType}
+                      </b>
+                    </p>
+                  </div>
+                )}
               </>
             )
           ) : (
             <>
               {title}
               {!isEditing ? (
-                <ChannelInfoIcon {...{ isEditing, setIsEditing }} />
+                <ChangeNameIcon {...{ isEditing, setIsEditing }} />
               ) : (
                 <ChannelSaveIcon />
               )}
             </>
           )}
-          {channel.type === "team" && (
+
+          {/* {channel.type === "team" && (
             <span
               onClick={() =>
                 !onInviteUser ? setOnInviteUser(true) : setOnInviteUser(false)
@@ -149,7 +156,7 @@ const MessagingChannelHeader = ({ setPinsOpen }) => {
             >
               <AddUser />
             </span>
-          )}
+          )} */}
         </div>
       )}
 
